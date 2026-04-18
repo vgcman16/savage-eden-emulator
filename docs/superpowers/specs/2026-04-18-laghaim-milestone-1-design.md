@@ -290,11 +290,11 @@ This list is intentionally written as a checklist so milestone progress can be t
 - [x] Approve architecture: runner, launcher probe, login gateway, trace logger
 - [x] Approve compatibility strategy: instrument first, emulate second
 - [x] Approve milestone-1 file layout and logging plan
-- [ ] Create initial emulator project skeleton
-- [ ] Implement runner and shared config
-- [ ] Implement launcher HTTP/status probe
+- [x] Create initial emulator project skeleton
+- [x] Implement runner and shared config
+- [x] Implement launcher HTTP/status probe
 - [ ] Verify launcher reports local server as online
-- [ ] Implement login gateway socket listener
+- [x] Implement login gateway socket listener
 - [ ] Capture first raw login handshake from stock client
 - [ ] Characterize message framing for login path
 - [ ] Implement stubbed login success response
