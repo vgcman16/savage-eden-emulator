@@ -315,7 +315,9 @@ This list is intentionally written as a checklist so milestone progress can be t
 - [ ] Verify stock client accepts stubbed login path
 - [x] Add upstream proxy mode for continued localhost packet capture
 - [x] Verify stock client can log in and reach character flow through localhost proxying
+- [x] Verify stock client can enter the world through localhost proxying
 - [x] Identify and fix the client working-directory requirement for local data files
+- [x] Mitigate the Intel iGPU world-load crash by forcing `Game.exe` onto the discrete GPU
 - [x] Save complete capture artifacts for milestone 2
 - [x] Write milestone-1 research summary with packet notes
 
