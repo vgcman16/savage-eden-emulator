@@ -14,6 +14,7 @@ class _LoginGatewayHandler(socketserver.BaseRequestHandler):
     writer: TraceWriter
     script: ConversationScript | None
     proxy_target: tuple[str, int] | None
+    packet_dir: str
     in_counter: int = 0
     out_counter: int = 0
     counter_lock: Lock
@@ -27,7 +28,7 @@ class _LoginGatewayHandler(socketserver.BaseRequestHandler):
             else:
                 cls.out_counter += 1
                 counter = cls.out_counter
-        return f"packets/conn-0001-{direction}-{counter:04d}.bin"
+        return f"{cls.packet_dir}/conn-0001-{direction}-{counter:04d}.bin"
 
     def _write_packet(self, direction: str, payload: bytes) -> None:
         packet_name = type(self)._next_packet_name(direction)
@@ -96,6 +97,7 @@ class LoginGatewayService:
         script_path: Path | None = None,
         proxy_host: str | None = None,
         proxy_port: int | None = None,
+        packet_dir: str = "packets",
     ) -> None:
         script = ConversationScript.load(script_path) if script_path is not None else None
         proxy_target = None
@@ -113,6 +115,7 @@ class LoginGatewayService:
                 "counter_lock": Lock(),
                 "script": script,
                 "proxy_target": proxy_target,
+                "packet_dir": packet_dir,
             },
         )
         self._server = _ThreadingTCPServer((host, port), handler)
