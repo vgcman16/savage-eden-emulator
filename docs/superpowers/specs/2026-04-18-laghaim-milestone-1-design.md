@@ -327,7 +327,7 @@ This follow-on checklist tracks the first reverse-engineering steps after milest
 
 - [x] Prove that captured `14021` TCP chunks can be split into protocol frames using the leading little-endian length field
 - [x] Generate a frame-aware family index for the successful in-world capture
-- [ ] Label the top repeated world-frame families by likely role
+- [x] Label the top repeated world-frame families by likely role
 - [ ] Correlate coordinate-like frames with controlled in-game movement and map interactions
 - [ ] Build the first standalone scripted or stubbed reply for one repeated world-frame family
 
