@@ -15,12 +15,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--http-port", type=int, default=8080)
     parser.add_argument("--login-port", type=int, default=4021)
     parser.add_argument("--capture-root", default="captures")
+    parser.add_argument("--script-path")
     parser.add_argument("--once", action="store_true")
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    script_path = Path(args.script_path) if args.script_path else None
     config = EmulatorConfig(
         bind_host=args.bind_host,
         http_port=args.http_port,
@@ -30,7 +32,12 @@ def main(argv: list[str] | None = None) -> int:
     writer = TraceWriter(config.capture_root)
     run_dir = writer.start_run("runner")
     http_probe = HttpProbeService(config.bind_host, config.http_port, writer)
-    login_gateway = LoginGatewayService(config.bind_host, config.login_port, writer)
+    login_gateway = LoginGatewayService(
+        config.bind_host,
+        config.login_port,
+        writer,
+        script_path=script_path,
+    )
     http_probe.start()
     login_gateway.start()
     writer.write_text(
@@ -39,6 +46,7 @@ def main(argv: list[str] | None = None) -> int:
             f"bind_host={config.bind_host}\n"
             f"http_port={http_probe.port}\n"
             f"login_port={login_gateway.port}\n"
+            f"script_path={script_path}\n"
             f"run_dir={run_dir}\n"
         ),
     )
