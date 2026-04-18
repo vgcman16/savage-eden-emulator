@@ -1,5 +1,6 @@
 # Local game client assets
 client/
+.worktrees/
 
 # Runtime captures and logs
 captures/
