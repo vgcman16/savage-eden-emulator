@@ -1,0 +1,7 @@
+{
+  "name": "captured-stock-login",
+  "captured_from": "captures/20260418-154355-runner/packets/conn-0001-in-0001.bin",
+  "notes": "Exact first login packet captured from the stock Game.exe client after redirecting SvrList.dta to localhost.",
+  "match_hex": "1100B10B7A975EC71045E61875B433AB313D0A0E0000000000000001006C6F67696E0A0E00000000000000020064656D6F6E0A1500ABB52B3820727D23EEB6941B2338E9E3206620300A",
+  "response_hex": "90000000"
+}

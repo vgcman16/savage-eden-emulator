@@ -1,0 +1,531 @@
+Program: Game.exe
+Target string references
+========================
+
+STRING: error!
+  dataAddress: 00879f58
+  text: character move value error!!!
+  xref: 004cfd20 -> FUN_004cfcf0 @ 004cfcf0
+
+STRING: error!
+  dataAddress: 0087e344
+  text: party request mode error!
+  xref: 0055551d -> FUN_00555290 @ 00555290
+
+STRING: error!
+  dataAddress: 0088a38c
+  text: error!
+  xref: 0076deba -> FUN_0076d990 @ 0076d990
+  xref: 0076e17f -> FUN_0076d990 @ 0076d990
+  xref: 006f5e59 -> FUN_006f5e10 @ 006f5e10
+
+STRING: Unable to read skill information.
+  dataAddress: 00891ee8
+  text: Unable to read skill information.
+  xref: 0076debf -> FUN_0076d990 @ 0076d990
+  xref: 0076e184 -> FUN_0076d990 @ 0076d990
+
+STRING: Unable to read
+  dataAddress: 00891ee8
+  text: Unable to read skill information.
+  xref: 0076debf -> FUN_0076d990 @ 0076d990
+  xref: 0076e184 -> FUN_0076d990 @ 0076d990
+
+STRING: skill information
+  dataAddress: 00891ee8
+  text: Unable to read skill information.
+  xref: 0076debf -> FUN_0076d990 @ 0076d990
+  xref: 0076e184 -> FUN_0076d990 @ 0076d990
+
+Functions selected for decompilation: 4
+
+Decompiled functions
+====================
+
+FUNCTION: FUN_004cfcf0 @ 004cfcf0
+TARGETS: [error!]
+----------------------------------------
+
+void __fastcall FUN_004cfcf0(undefined4 param_1)
+
+{
+  FUN_006d3060(param_1);
+  DAT_008dad90 = FUN_00490f7e(&DAT_008daa10);
+  if (DAT_008dad90 == 0) {
+    *(undefined4 *)(DAT_008deba4 + 0x88) = 0;
+    return;
+  }
+  if (DAT_008dad90 != 1) {
+    if (DAT_008dad90 != 2) {
+      FUN_00408d00("character move value error!!!");
+      return;
+    }
+    *(undefined4 *)(DAT_008deba4 + 0x88) = 0x3e4ccccd;
+    return;
+  }
+  *(undefined4 *)(DAT_008deba4 + 0x88) = 0x3dcccccd;
+  return;
+}
+
+
+
+FUNCTION: FUN_00555290 @ 00555290
+TARGETS: [error!]
+----------------------------------------
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+void __thiscall FUN_00555290(int param_1,undefined4 param_2)
+
+{
+  char cVar1;
+  undefined *puVar2;
+  undefined4 uVar3;
+  undefined4 extraout_ECX;
+  uint uVar4;
+  char *pcVar5;
+  uint uVar6;
+  char *pcVar7;
+  int in_stack_00000014;
+  undefined4 in_stack_00000018;
+  undefined1 local_24c;
+  undefined4 local_24b;
+  undefined4 uStack_247;
+  undefined4 uStack_243;
+  undefined4 uStack_23f;
+  undefined8 local_23b;
+  undefined4 local_233;
+  undefined2 local_22f;
+  undefined1 local_22d;
+  undefined1 local_22c;
+  undefined4 local_22b;
+  undefined4 uStack_227;
+  undefined4 uStack_223;
+  undefined4 uStack_21f;
+  undefined8 local_21b;
+  undefined4 local_213;
+  undefined2 local_20f;
+  char local_20d [257];
+  char local_10c [260];
+  uint local_8;
+  
+  local_8 = DAT_008ce040 ^ (uint)&local_24c;
+  *(undefined4 *)(param_1 + 0xf7c) = param_2;
+  local_20d[1] = 0;
+  _memset(local_20d + 2,0,0xff);
+  local_10c[0] = '\0';
+  _memset(local_10c + 1,0,0xff);
+  local_22c = 0;
+  local_21b = 0;
+  local_213 = 0;
+  local_20f = 0;
+  local_20d[0] = '\0';
+  local_24c = 0;
+  local_23b = 0;
+  local_233 = 0;
+  local_22f = 0;
+  local_22d = 0;
+  local_22b = 0;
+  uStack_227 = 0;
+  uStack_223 = 0;
+  uStack_21f = 0;
+  local_24b = 0;
+  uStack_247 = 0;
+  uStack_243 = 0;
+  uStack_23f = 0;
+  if ((in_stack_00000014 == 1) || (in_stack_00000014 == 2)) {
+    puVar2 = (undefined *)FUN_005c2840();
+  }
+  else {
+    puVar2 = &DAT_0087e2e8;
+  }
+  FUN_00404140(&local_22c,&DAT_008798e0,puVar2);
+  switch(in_stack_00000018) {
+  case 1:
+    puVar2 = (undefined *)FUN_005c2840();
+    break;
+  case 2:
+    puVar2 = (undefined *)FUN_005c2840();
+    break;
+  case 3:
+    puVar2 = (undefined *)FUN_005c2840();
+    break;
+  case 4:
+    puVar2 = (undefined *)FUN_005c2840();
+    break;
+  case 5:
+    puVar2 = (undefined *)FUN_005c2840();
+    break;
+  default:
+    puVar2 = &DAT_0087e2e8;
+  }
+  FUN_00404140(&local_24c,&DAT_008798e0,puVar2);
+  switch(param_2) {
+  case 0:
+  case 1:
+    uVar3 = FUN_005c2840(extraout_ECX,&DAT_008dab10);
+    FUN_00404140(local_20d + 1,uVar3);
+    FUN_00404140(local_10c," [Exp:%s/Item:%s]",&local_22c,&local_24c);
+    pcVar5 = local_10c;
+    do {
+      cVar1 = *pcVar5;
+      pcVar5 = pcVar5 + 1;
+    } while (cVar1 != '\0');
+    uVar6 = (int)pcVar5 - (int)local_10c;
+    pcVar5 = local_20d;
+    do {
+      pcVar7 = pcVar5 + 1;
+      pcVar5 = pcVar5 + 1;
+    } while (*pcVar7 != '\0');
+    pcVar7 = local_10c;
+    for (uVar4 = uVar6 >> 2; uVar4 != 0; uVar4 = uVar4 - 1) {
+      *(undefined4 *)pcVar5 = *(undefined4 *)pcVar7;
+      pcVar7 = pcVar7 + 4;
+      pcVar5 = pcVar5 + 4;
+    }
+    for (uVar6 = uVar6 & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
+      *pcVar5 = *pcVar7;
+      pcVar7 = pcVar7 + 1;
+      pcVar5 = pcVar5 + 1;
+    }
+    break;
+  case 2:
+    uVar3 = FUN_005c2840(extraout_ECX,&DAT_008dab10);
+    FUN_00404140(local_20d + 1,uVar3);
+    FUN_00404140(local_10c," [Exp:%s/Item:%s]",&local_22c,&local_24c);
+    pcVar5 = local_10c;
+    do {
+      cVar1 = *pcVar5;
+      pcVar5 = pcVar5 + 1;
+    } while (cVar1 != '\0');
+    uVar6 = (int)pcVar5 - (int)local_10c;
+    pcVar5 = local_20d;
+    do {
+      pcVar7 = pcVar5 + 1;
+      pcVar5 = pcVar5 + 1;
+    } while (*pcVar7 != '\0');
+    pcVar7 = local_10c;
+    for (uVar4 = uVar6 >> 2; uVar4 != 0; uVar4 = uVar4 - 1) {
+      *(undefined4 *)pcVar5 = *(undefined4 *)pcVar7;
+      pcVar7 = pcVar7 + 4;
+      pcVar5 = pcVar5 + 4;
+    }
+    for (uVar6 = uVar6 & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
+      *pcVar5 = *pcVar7;
+      pcVar7 = pcVar7 + 1;
+      pcVar5 = pcVar5 + 1;
+    }
+    break;
+  case 3:
+  case 6:
+    goto LAB_005554d0;
+  case 4:
+    uVar3 = FUN_005c2840(extraout_ECX,&DAT_008dab10);
+    FUN_00404140(local_20d + 1,uVar3);
+    break;
+  case 5:
+LAB_005554d0:
+    uVar3 = FUN_005c2840(&DAT_008da810,&DAT_008dab10);
+    FUN_00404140(local_20d + 1,uVar3);
+    break;
+  default:
+    FUN_00404140(local_20d + 1,"party request mode error!");
+  }
+  FUN_0064c270(local_20d + 1,0x14,0xb,0x1e,0);
+  return;
+}
+
+
+
+FUNCTION: FUN_0076d990 @ 0076d990
+TARGETS: [error!, Unable to read skill information., Unable to read, skill information]
+----------------------------------------
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+/* WARNING: Removing unreachable block (ram,0x0076e1b7) */
+/* WARNING: Removing unreachable block (ram,0x0076e1c5) */
+/* WARNING: Removing unreachable block (ram,0x0076def2) */
+/* WARNING: Removing unreachable block (ram,0x0076df00) */
+/* WARNING: Removing unreachable block (ram,0x0076dff9) */
+/* WARNING: Removing unreachable block (ram,0x0076e00d) */
+/* WARNING: Removing unreachable block (ram,0x0076df71) */
+/* WARNING: Removing unreachable block (ram,0x0076df7b) */
+/* WARNING: Removing unreachable block (ram,0x0076df80) */
+/* WARNING: Removing unreachable block (ram,0x0076df87) */
+/* WARNING: Removing unreachable block (ram,0x0076df93) */
+/* WARNING: Removing unreachable block (ram,0x0076dfa7) */
+/* WARNING: Removing unreachable block (ram,0x0076dfa9) */
+/* WARNING: Removing unreachable block (ram,0x0076dfb3) */
+/* WARNING: Removing unreachable block (ram,0x0076dfce) */
+/* WARNING: Removing unreachable block (ram,0x0076dfd4) */
+/* WARNING: Removing unreachable block (ram,0x0076db20) */
+/* WARNING: Removing unreachable block (ram,0x0076db30) */
+/* WARNING: Removing unreachable block (ram,0x0076db76) */
+/* WARNING: Removing unreachable block (ram,0x0076db80) */
+/* WARNING: Removing unreachable block (ram,0x0076dba3) */
+/* WARNING: Removing unreachable block (ram,0x0076dbab) */
+/* WARNING: Removing unreachable block (ram,0x0076dbc5) */
+/* WARNING: Removing unreachable block (ram,0x0076dbcc) */
+/* WARNING: Removing unreachable block (ram,0x0076ddbd) */
+/* WARNING: Removing unreachable block (ram,0x0076ddc7) */
+/* WARNING: Removing unreachable block (ram,0x0076ddea) */
+/* WARNING: Removing unreachable block (ram,0x0076ddf2) */
+/* WARNING: Removing unreachable block (ram,0x0076de10) */
+/* WARNING: Removing unreachable block (ram,0x0076de17) */
+/* WARNING: Removing unreachable block (ram,0x0076e1ad) */
+/* WARNING: Removing unreachable block (ram,0x0076e1cb) */
+/* WARNING: Removing unreachable block (ram,0x0076e1ec) */
+/* WARNING: Removing unreachable block (ram,0x0076e200) */
+/* WARNING: Removing unreachable block (ram,0x0076e2b8) */
+/* WARNING: Removing unreachable block (ram,0x0076e236) */
+/* WARNING: Removing unreachable block (ram,0x0076e240) */
+/* WARNING: Removing unreachable block (ram,0x0076e243) */
+/* WARNING: Removing unreachable block (ram,0x0076e24a) */
+/* WARNING: Removing unreachable block (ram,0x0076e256) */
+/* WARNING: Removing unreachable block (ram,0x0076e2f3) */
+/* WARNING: Removing unreachable block (ram,0x0076e26a) */
+/* WARNING: Removing unreachable block (ram,0x0076e26c) */
+/* WARNING: Removing unreachable block (ram,0x0076e276) */
+/* WARNING: Removing unreachable block (ram,0x0076e291) */
+/* WARNING: Removing unreachable block (ram,0x0076e297) */
+/* WARNING: Removing unreachable block (ram,0x0076e2c8) */
+/* WARNING: Removing unreachable block (ram,0x0076da76) */
+/* WARNING: Removing unreachable block (ram,0x0076da80) */
+/* WARNING: Removing unreachable block (ram,0x0076da91) */
+/* WARNING: Removing unreachable block (ram,0x0076da89) */
+/* WARNING: Removing unreachable block (ram,0x0076da9c) */
+/* WARNING: Removing unreachable block (ram,0x0076daac) */
+/* WARNING: Removing unreachable block (ram,0x0076dac0) */
+/* WARNING: Removing unreachable block (ram,0x0076dac3) */
+/* WARNING: Removing unreachable block (ram,0x0076dac6) */
+/* WARNING: Removing unreachable block (ram,0x0076dac9) */
+/* WARNING: Removing unreachable block (ram,0x0076de4b) */
+/* WARNING: Removing unreachable block (ram,0x0076e012) */
+/* WARNING: Removing unreachable block (ram,0x0076deb8) */
+/* WARNING: Removing unreachable block (ram,0x0076dee8) */
+/* WARNING: Removing unreachable block (ram,0x0076df06) */
+/* WARNING: Removing unreachable block (ram,0x0076df27) */
+/* WARNING: Removing unreachable block (ram,0x0076e2ee) */
+/* WARNING: Removing unreachable block (ram,0x0076df3b) */
+/* WARNING: Removing unreachable block (ram,0x0076df63) */
+/* WARNING: Removing unreachable block (ram,0x0076e037) */
+/* WARNING: Removing unreachable block (ram,0x0076e042) */
+/* WARNING: Removing unreachable block (ram,0x0076e04e) */
+/* WARNING: Removing unreachable block (ram,0x0076e06a) */
+/* WARNING: Removing unreachable block (ram,0x0076e073) */
+/* WARNING: Removing unreachable block (ram,0x0076e07b) */
+/* WARNING: Removing unreachable block (ram,0x0076e089) */
+/* WARNING: Removing unreachable block (ram,0x0076e08c) */
+/* WARNING: Removing unreachable block (ram,0x0076e0a0) */
+/* WARNING: Removing unreachable block (ram,0x0076e0bb) */
+/* WARNING: Removing unreachable block (ram,0x0076e0c2) */
+/* WARNING: Removing unreachable block (ram,0x0076e0c8) */
+/* WARNING: Removing unreachable block (ram,0x0076e0cc) */
+/* WARNING: Removing unreachable block (ram,0x0076e0e2) */
+/* WARNING: Removing unreachable block (ram,0x0076e0d4) */
+/* WARNING: Removing unreachable block (ram,0x0076e0de) */
+/* WARNING: Removing unreachable block (ram,0x0076e0e7) */
+/* WARNING: Removing unreachable block (ram,0x0076e0f0) */
+/* WARNING: Removing unreachable block (ram,0x0076e0eb) */
+/* WARNING: Removing unreachable block (ram,0x0076e0b6) */
+/* WARNING: Removing unreachable block (ram,0x0076e0f9) */
+/* WARNING: Removing unreachable block (ram,0x0076e114) */
+/* WARNING: Removing unreachable block (ram,0x0076e120) */
+/* WARNING: Removing unreachable block (ram,0x0076e150) */
+
+void FUN_0076d990(void)
+
+{
+  char cVar1;
+  uint uVar2;
+  char *pcVar3;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_0086077e;
+  local_10 = ExceptionList;
+  uVar2 = DAT_008ce040 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  DAT_008dfb58 = 0;
+  local_8 = 0;
+  pcVar3 = (char *)0x0;
+  switch(DAT_008dd6ac) {
+  case 0:
+    pcVar3 = "data/menu/str/US.txt";
+    break;
+  case 1:
+    pcVar3 = "data/menu/str/BR.txt";
+    break;
+  case 2:
+    pcVar3 = "data/menu/str/DE.txt";
+    break;
+  case 3:
+    pcVar3 = "data/menu/str/KR.txt";
+    break;
+  case 4:
+    pcVar3 = "data/menu/str/CN.txt";
+    break;
+  case 5:
+    pcVar3 = "data/menu/str/JP.txt";
+    break;
+  case 6:
+    pcVar3 = "data/menu/str/TH.txt";
+    break;
+  case 7:
+    pcVar3 = "data/menu/str/ID.txt";
+  }
+  cVar1 = FUN_008420b0(pcVar3,DAT_008dd6ac);
+  if (cVar1 != '\0') {
+    DAT_008dfb58 = 0;
+  }
+  MessageBoxA((HWND)0x0,"Unable to read skill information.","error!",0);
+  FUN_00841e30(uVar2);
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+FUNCTION: FUN_006f5e10 @ 006f5e10
+TARGETS: [error!]
+----------------------------------------
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+undefined4 __fastcall FUN_006f5e10(int param_1)
+
+{
+  char cVar1;
+  int iVar2;
+  uint uVar3;
+  FILE *pFVar4;
+  undefined4 uVar5;
+  int iVar6;
+  char *pcVar7;
+  int *piVar8;
+  int iVar9;
+  undefined1 local_8c [4];
+  int *local_88;
+  int local_84;
+  int local_80;
+  char local_7c [104];
+  uint local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_0085c9b9;
+  local_10 = ExceptionList;
+  uVar3 = DAT_008ce040 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  local_14 = uVar3;
+  pFVar4 = _fopen("data/etc/help.txt","rb");
+  if (pFVar4 == (FILE *)0x0) {
+    MessageBoxA((HWND)0x0,"I can not read the information.","error!",0);
+    uVar5 = 0;
+  }
+  else {
+    FUN_00405240(pFVar4,&DAT_00878844,local_8c,uVar3);
+    local_84 = -1;
+    do {
+      FUN_00405240(pFVar4,&DAT_00878844,&local_84,uVar3);
+      FUN_00405240(pFVar4,&DAT_00878844,&local_80);
+      iVar9 = 0;
+      if (0 < local_80) {
+        do {
+          FUN_006f0550();
+          iVar9 = iVar9 + 1;
+        } while (iVar9 < local_80);
+      }
+    } while (local_84 != 0);
+    if (*(int *)(param_1 + 0x23b0) == 0) {
+      *(undefined4 *)(param_1 + 0x23b0) = 1;
+      piVar8 = (int *)(param_1 + 0x23a4);
+      local_88 = piVar8;
+      if (*(int *)(param_1 + 0x23a4) != 0) {
+        FUN_004287f0(*(int *)(param_1 + 0x23a4));
+      }
+      uVar5 = 0x204;
+      FUN_0048312c(0x204);
+      local_8 = 0;
+      iVar9 = FUN_006b7a40(0x48,uVar5);
+      local_8 = 0xffffffff;
+      *piVar8 = iVar9;
+      FUN_00405240(pFVar4,&DAT_00878844,&local_84);
+      FUN_00405240(pFVar4,&DAT_00878844,&local_80);
+      FUN_006b79a0(local_80,7);
+      if ((DAT_008ceea4 == 0) && (DAT_008dd6c0 == 0)) {
+        iVar9 = *piVar8;
+        if (*(int *)(iVar9 + 0x13c) != 0) {
+          thunk_FUN_004a1a90(*(int *)(iVar9 + 0x13c));
+        }
+        iVar6 = FUN_00482f23(7);
+        pcVar7 = "  Help";
+        *(int *)(iVar9 + 0x13c) = iVar6;
+        do {
+          cVar1 = *pcVar7;
+          pcVar7 = pcVar7 + 1;
+          pcVar7[iVar6 + -0x88c555] = cVar1;
+        } while (cVar1 != '\0');
+      }
+      else {
+        iVar9 = *piVar8;
+        if (*(int *)(iVar9 + 0x13c) != 0) {
+          thunk_FUN_004a1a90(*(int *)(iVar9 + 0x13c));
+        }
+        iVar6 = FUN_00482f23(0xe);
+        *(int *)(iVar9 + 0x13c) = iVar6;
+        pcVar7 = " Help Message";
+        do {
+          cVar1 = *pcVar7;
+          pcVar7[iVar6 + -0x88c544] = cVar1;
+          pcVar7 = pcVar7 + 1;
+          local_88 = piVar8;
+        } while (cVar1 != '\0');
+      }
+      *(undefined4 *)(iVar9 + 0x1ac) = 1;
+      iVar9 = 0;
+      if (0 < local_80) {
+        do {
+          FUN_006f0550();
+          iVar6 = *piVar8;
+          if (*(int *)(iVar6 + 0x1dc) < *(int *)(iVar6 + 0x1d8)) {
+            iVar2 = *(int *)(*(int *)(iVar6 + 0x140) + *(int *)(iVar6 + 0x1dc) * 4);
+            *(int *)(iVar6 + 0x1dc) = *(int *)(iVar6 + 0x1dc) + 1;
+            pcVar7 = local_7c;
+            do {
+              cVar1 = *pcVar7;
+              pcVar7[iVar2 - (int)local_7c] = cVar1;
+              pcVar7 = pcVar7 + 1;
+            } while (cVar1 != '\0');
+          }
+          iVar9 = iVar9 + 1;
+          piVar8 = local_88;
+        } while (iVar9 < local_80);
+      }
+      FUN_006b6f40();
+    }
+    else {
+      iVar9 = *(int *)(param_1 + 0x23a4);
+      *(undefined4 *)(param_1 + 0x23b0) = 0;
+      if (iVar9 != 0) {
+        FUN_006b65a0();
+        *(undefined ***)(iVar9 + 0x84) = CBasicStatic::vftable;
+        if (*(undefined4 **)(iVar9 + 0x88) != (undefined4 *)0x0) {
+          (**(code **)**(undefined4 **)(iVar9 + 0x88))(1);
+          *(undefined4 *)(iVar9 + 0x88) = 0;
+        }
+        FUN_00482bbd(iVar9,0x204);
+        *(undefined4 *)(param_1 + 0x23a4) = 0;
+      }
+    }
+    FUN_00497663(pFVar4);
+    uVar5 = 1;
+  }
+  ExceptionList = local_10;
+  return uVar5;
+}
+
+

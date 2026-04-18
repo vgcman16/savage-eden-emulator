@@ -59,6 +59,31 @@ class RunnerTests(unittest.TestCase):
             summary = (run_dir / "summary.md").read_text(encoding="utf-8")
             self.assertIn(f"script_path={script_path}", summary)
 
+    def test_main_once_accepts_proxy_target_and_records_it_in_summary(self) -> None:
+        with TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+
+            exit_code = runner.main(
+                [
+                    "--capture-root",
+                    tmp_dir,
+                    "--http-port",
+                    "0",
+                    "--login-port",
+                    "0",
+                    "--proxy-host",
+                    "127.0.0.1",
+                    "--proxy-port",
+                    "4005",
+                    "--once",
+                ]
+            )
+
+            self.assertEqual(exit_code, 0)
+            run_dir = next(tmp_path.glob("*"))
+            summary = (run_dir / "summary.md").read_text(encoding="utf-8")
+            self.assertIn("proxy_target=127.0.0.1:4005", summary)
+
 
 if __name__ == "__main__":
     unittest.main()

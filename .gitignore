@@ -5,6 +5,7 @@ client/
 # Runtime captures and logs
 captures/
 *.log
+.tmp_proxy_*.py
 
 # Python
 __pycache__/
@@ -20,3 +21,6 @@ venv/
 Thumbs.db
 .idea/
 .vscode/
+
+# Reverse-engineering workspace caches
+notes/research/ghidra_project/

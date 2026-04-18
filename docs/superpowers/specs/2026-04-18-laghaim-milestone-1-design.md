@@ -2,11 +2,11 @@
 
 **Date:** 2026-04-18
 
-**Topic:** Stock launcher/client compatibility shim for local server discovery and stubbed login success
+**Topic:** Stock launcher/client compatibility shim for local server discovery and captured login-path progression
 
 ## Goal
 
-Build a small local emulator stack that gets the stock `LAUNCHER_PLAY.exe` and `Game.exe` to talk to localhost, report the server as online, and complete a stubbed login success path while capturing every request and response needed for later milestones.
+Build a small local emulator stack that gets the stock `LAUNCHER_PLAY.exe` and `Game.exe` to talk to localhost, report the server as online, and advance through the first login boundary using scripted replies or an upstream proxy while capturing every request and response needed for later milestones.
 
 ## Scope
 
@@ -17,6 +17,7 @@ Included:
 - Local service startup and orchestration
 - Launcher status/update probe compatibility
 - Local login gateway compatibility
+- Scripted replay and upstream proxy modes for the login path
 - Request/response packet capture
 - Stubbed login success path
 
@@ -41,7 +42,7 @@ The architecture has four parts:
 2. `launcher probe`
    Handles the launcher's HTTP or status checks so the launcher believes the server is online and does not require an update.
 3. `login gateway`
-   Accepts the game's login connection, records the handshake, and returns the minimum stubbed success response.
+   Accepts the game's login connection, records the handshake, and can either return scripted responses or proxy the upstream login server while preserving local captures.
 4. `trace logger`
    Writes structured raw packet logs, decoded notes, and per-run observations for later milestones.
 
@@ -78,7 +79,7 @@ The compatibility layers are:
 3. `message framing`
    Determine whether traffic is fixed-size, length-prefixed, compressed, encrypted, or XOR-obfuscated.
 4. `minimal handlers`
-   Implement only the request/response pairs needed for launcher online status, update bypass, login handshake, and stubbed login success.
+   Implement only the request/response pairs needed for launcher online status, update bypass, login handshake, scripted replay, and upstream proxy capture when pure stubbing is not yet sufficient.
 
 ## Redirection Policy
 
@@ -96,13 +97,17 @@ If the launcher blocks progress because of self-update logic:
 
 - Return a local "no update required" response
 
+If the first stubbed login response does not advance the client:
+
+- Add an upstream proxy mode so localhost stays in the loop while we capture the real post-auth exchange
+
 If launcher and game traffic use different ports or protocols:
 
 - Keep them as separate services
 
 If the login protocol is obfuscated:
 
-- Milestone 1 still succeeds if we can capture it, characterize the framing, and satisfy the minimum success path
+- Milestone 1 still succeeds if we can capture it, characterize the framing, and preserve a working proxied login path for deeper packet collection
 
 If the launcher requires the original website domain:
 
@@ -208,7 +213,7 @@ Expected milestone-1 flow:
 8. Game opens login connection to local gateway
 9. User enters username/password
 10. Emulator captures login handshake
-11. Emulator returns stubbed success response
+11. Emulator returns a scripted or proxied response sequence
 12. Capture artifacts are written for milestone 2
 
 ## Logging and Research Output
@@ -229,7 +234,7 @@ Each run summary should answer:
 - Did the launcher report the server online
 - Did the game reach the login connection
 - What packets were observed
-- Did the client accept the stubbed success path
+- Did the client accept the scripted or proxied login path
 - Where did it fail if it did not fully succeed
 
 ## Definition of Done
@@ -241,7 +246,7 @@ Milestone 1 is complete when all of the following are true:
 - The launcher shows the server as online
 - The stock client reaches the login flow against the local emulator
 - Entering a username/password produces a real captured login exchange
-- The emulator returns a stubbed success response instead of immediate disconnect or obvious hard failure
+- The emulator can return scripted responses or proxy the upstream login flow without losing local captures
 - The full launcher and login request/response path is logged for later milestones
 
 ## Risks
@@ -273,6 +278,15 @@ Mitigation:
 - Build framing helpers first
 - Log multiple repeated runs with controlled inputs
 
+### Client assumes launch from its installation root
+
+The stock client reads language and UI data through relative paths such as `data/menu/str/US.txt`.
+
+Mitigation:
+
+- Start `Game.exe` with the extracted client directory as the working directory
+- Use Ghidra-backed string and xref tracing when a popup suggests a missing local asset rather than a network failure
+
 ### Launcher hard dependency on original website
 
 The launcher may insist on contacting the original domain.
@@ -293,14 +307,17 @@ This list is intentionally written as a checklist so milestone progress can be t
 - [x] Create initial emulator project skeleton
 - [x] Implement runner and shared config
 - [x] Implement launcher HTTP/status probe
-- [ ] Verify launcher reports local server as online
+- [x] Verify launcher reports local server as online
 - [x] Implement login gateway socket listener
-- [ ] Capture first raw login handshake from stock client
-- [ ] Characterize message framing for login path
-- [ ] Implement stubbed login success response
+- [x] Capture first raw login handshake from stock client
+- [x] Characterize message framing for login path
+- [x] Implement stubbed login success response
 - [ ] Verify stock client accepts stubbed login path
-- [ ] Save complete capture artifacts for milestone 2
-- [ ] Write milestone-1 research summary with packet notes
+- [x] Add upstream proxy mode for continued localhost packet capture
+- [x] Verify stock client can log in and reach character flow through localhost proxying
+- [x] Identify and fix the client working-directory requirement for local data files
+- [x] Save complete capture artifacts for milestone 2
+- [x] Write milestone-1 research summary with packet notes
 
 ## Out of Scope Reminder
 

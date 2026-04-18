@@ -16,12 +16,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--login-port", type=int, default=4021)
     parser.add_argument("--capture-root", default="captures")
     parser.add_argument("--script-path")
+    parser.add_argument("--proxy-host")
+    parser.add_argument("--proxy-port", type=int)
     parser.add_argument("--once", action="store_true")
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.script_path and args.proxy_host:
+        raise ValueError("script-path and proxy-host are mutually exclusive")
+    if args.proxy_port is not None and not args.proxy_host:
+        raise ValueError("proxy-port requires proxy-host")
     script_path = Path(args.script_path) if args.script_path else None
     config = EmulatorConfig(
         bind_host=args.bind_host,
@@ -37,6 +43,8 @@ def main(argv: list[str] | None = None) -> int:
         config.login_port,
         writer,
         script_path=script_path,
+        proxy_host=args.proxy_host,
+        proxy_port=args.proxy_port,
     )
     http_probe.start()
     login_gateway.start()
@@ -47,6 +55,7 @@ def main(argv: list[str] | None = None) -> int:
             f"http_port={http_probe.port}\n"
             f"login_port={login_gateway.port}\n"
             f"script_path={script_path}\n"
+            f"proxy_target={args.proxy_host}:{args.proxy_port}\n"
             f"run_dir={run_dir}\n"
         ),
     )

@@ -9,6 +9,7 @@ from pathlib import Path
 class ConversationScript:
     match_bytes: bytes
     response_bytes: bytes
+    close_after_response: bool = False
 
     @classmethod
     def load(cls, path: Path) -> "ConversationScript":
@@ -16,4 +17,5 @@ class ConversationScript:
         return cls(
             match_bytes=bytes.fromhex(payload["match_hex"]),
             response_bytes=bytes.fromhex(payload["response_hex"]),
+            close_after_response=bool(payload.get("close_after_response", False)),
         )
