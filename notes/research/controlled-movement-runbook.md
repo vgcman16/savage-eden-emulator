@@ -132,3 +132,40 @@ The best confirmation signal would be:
 - the `x` span growing mostly in the east run
 - the `y` span growing mostly in the north run
 - nearby `1d004d23c18ad027` / `1d00b45f47d593c6` changes tracking the same movement windows
+
+## Pass 2 Tightening
+
+The first controlled pass confirmed that `1d00f67be12c7d6a` reacts to deliberate movement, but it moved along the same apparent axis in both the east and north runs. Before running a second pass:
+
+- keep the camera fixed for the whole run
+- do not rotate the character or camera between moves if it can be avoided
+- prefer one longer straight movement instead of many short corrections
+- if the client supports keyboard movement, prefer that over click-to-move
+
+Recommended second-pass labels:
+
+- `walk-east-long`
+- `walk-west-long`
+- `walk-north-long`
+
+The main goal is to see whether `1d00f67be12c7d6a` still changes only one field when the travel direction changes, or whether the first pass just happened to project multiple motions onto the same world axis.
+
+## Target-Family Trace
+
+After the normal frame, label, and movement-candidate generation, write focused traces for the main suspect families:
+
+```powershell
+python -c "from pathlib import Path; from emulator.tools.world_family_trace import write_world_family_trace_report; write_world_family_trace_report({'idle': Path(r'$($idle.FullName)'), 'walk-east': Path(r'$($east.FullName)'), 'walk-north': Path(r'$($north.FullName)')}, prefix_hex='1d00f67be12c7d6a', target=Path('captures/trace-1d00f67be12c7d6a'))"
+
+python -c "from pathlib import Path; from emulator.tools.world_family_trace import write_world_family_trace_report; write_world_family_trace_report({'idle': Path(r'$($idle.FullName)'), 'walk-east': Path(r'$($east.FullName)'), 'walk-north': Path(r'$($north.FullName)')}, prefix_hex='1d004d23c18ad027', target=Path('captures/trace-1d004d23c18ad027'))"
+```
+
+Read:
+
+- `captures/trace-1d00f67be12c7d6a/summary.md`
+- `captures/trace-1d004d23c18ad027/summary.md`
+
+Success criteria for pass 2:
+
+- `1d00f67be12c7d6a` shows a clearly different dominant axis or different signed delta pattern between at least two directional runs
+- or a neighboring entity-position family such as `1d004d23c18ad027` becomes the cleaner directional indicator
