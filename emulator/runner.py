@@ -28,6 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--http-port", type=int, default=8080)
     parser.add_argument("--login-port", type=int, default=4021)
     parser.add_argument("--capture-root", default="captures")
+    parser.add_argument("--run-label", default="runner")
     parser.add_argument("--script-path")
     parser.add_argument("--proxy-host")
     parser.add_argument("--proxy-port", type=int)
@@ -54,7 +55,7 @@ def main(argv: list[str] | None = None) -> int:
         capture_root=Path(args.capture_root),
     )
     writer = TraceWriter(config.capture_root)
-    run_dir = writer.start_run("runner")
+    run_dir = writer.start_run(args.run_label)
     http_probe = HttpProbeService(config.bind_host, config.http_port, writer)
     login_gateway = LoginGatewayService(
         config.bind_host,
@@ -88,6 +89,7 @@ def main(argv: list[str] | None = None) -> int:
             f"bind_host={config.bind_host}\n"
             f"http_port={http_probe.port}\n"
             f"login_port={login_gateway.port}\n"
+            f"run_label={args.run_label}\n"
             f"script_path={script_path}\n"
             f"proxy_target={args.proxy_host}:{args.proxy_port}\n"
             f"{extra_proxy_lines}"

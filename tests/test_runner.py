@@ -114,6 +114,30 @@ class RunnerTests(unittest.TestCase):
             self.assertIn("extra_proxy=4007->127.0.0.1:4007", summary)
             self.assertIn("extra_proxy=4008->127.0.0.1:4008", summary)
 
+    def test_main_once_accepts_run_label_and_uses_it_for_run_directory(self) -> None:
+        with TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+
+            exit_code = runner.main(
+                [
+                    "--capture-root",
+                    tmp_dir,
+                    "--http-port",
+                    "0",
+                    "--login-port",
+                    "0",
+                    "--run-label",
+                    "idle-east",
+                    "--once",
+                ]
+            )
+
+            self.assertEqual(exit_code, 0)
+            run_dir = next(tmp_path.glob("*"))
+            self.assertTrue(run_dir.name.endswith("-idle-east"))
+            summary = (run_dir / "summary.md").read_text(encoding="utf-8")
+            self.assertIn("run_label=idle-east", summary)
+
 
 if __name__ == "__main__":
     unittest.main()
