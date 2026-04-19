@@ -315,9 +315,24 @@ This list is intentionally written as a checklist so milestone progress can be t
 - [ ] Verify stock client accepts stubbed login path
 - [x] Add upstream proxy mode for continued localhost packet capture
 - [x] Verify stock client can log in and reach character flow through localhost proxying
+- [x] Verify stock client can enter the world through localhost proxying
 - [x] Identify and fix the client working-directory requirement for local data files
+- [x] Mitigate the Intel iGPU world-load crash by forcing `Game.exe` onto the discrete GPU
 - [x] Save complete capture artifacts for milestone 2
 - [x] Write milestone-1 research summary with packet notes
+
+## World Stream Discovery Queue
+
+This follow-on checklist tracks the first reverse-engineering steps after milestone 1 so world-emulation work can keep moving in small, checkable slices.
+
+- [x] Prove that captured `14021` TCP chunks can be split into protocol frames using the leading little-endian length field
+- [x] Generate a frame-aware family index for the successful in-world capture
+- [x] Label the top repeated world-frame families by likely role
+- [x] Collect pass-2 long directional captures and refresh targeted family traces for the main movement suspects
+- [ ] Correlate coordinate-like frames with controlled in-game movement and map interactions
+- [ ] Build the first standalone scripted or stubbed reply for one repeated world-frame family
+
+Current note: the long directional pass improved the evidence but did not fully resolve directionality. `walk-east-long` still activates `1d00f67be12c7d6a`, while constrained `walk-west-long` and `walk-north-long` runs leave that family static and instead light up `1d004d23c18ad027`. The next checkpoint attempt should start from a less constrained open-area position.
 
 ## Out of Scope Reminder
 

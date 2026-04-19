@@ -1,0 +1,70 @@
+Program: Game.exe
+Target address: 004a0c04
+Function: FUN_004a0bdb @ 004a0bdb
+
+References to target
+====================
+
+Instructions around target
+=========================
+   004a0bd5  POP EBP
+   004a0bd6  JMP 0x004a0b50
+   004a0bdb  CALL 0x004aa911
+   004a0be0  TEST EAX,EAX
+   004a0be2  JZ 0x004a0bec
+   004a0be4  PUSH 0x16
+   004a0be6  CALL 0x004aa956
+   004a0beb  POP ECX
+   004a0bec  TEST byte ptr [0x008ce204],0x2
+   004a0bf3  JZ 0x004a0c17
+   004a0bf5  PUSH 0x17
+   004a0bf7  CALL dword ptr [0x00868278]
+   004a0bfd  TEST EAX,EAX
+   004a0bff  JZ 0x004a0c06
+   004a0c01  PUSH 0x7
+   004a0c03  POP ECX
+>> 004a0c04  INT 0x29
+   004a0c06  PUSH 0x1
+   004a0c08  PUSH 0x40000015
+   004a0c0d  PUSH 0x3
+   004a0c0f  CALL 0x00490fe6
+   004a0c14  ADD ESP,0xc
+   004a0c17  PUSH 0x3
+   004a0c19  CALL 0x0049881f
+   004a0c20  JMP dword ptr [0x00868568]
+   004a0c30  MOV EDI,EDI
+   004a0c32  PUSH EBP
+   004a0c33  MOV EBP,ESP
+   004a0c35  PUSH EDI
+   004a0c36  MOV EDI,dword ptr [EBP + 0x8]
+   004a0c39  TEST EDI,EDI
+   004a0c3b  JZ 0x004a0ca7
+   004a0c3d  MOV EDX,dword ptr [EBP + 0xc]
+
+Function decompilation
+======================
+
+void FUN_004a0bdb(void)
+
+{
+  code *pcVar1;
+  int iVar2;
+  BOOL BVar3;
+  
+  iVar2 = ___acrt_get_sigabrt_handler();
+  if (iVar2 != 0) {
+    FUN_004aa956(0x16);
+  }
+  if ((DAT_008ce204 & 2) != 0) {
+    BVar3 = IsProcessorFeaturePresent(0x17);
+    if (BVar3 != 0) {
+      pcVar1 = (code *)swi(0x29);
+      (*pcVar1)();
+    }
+    ___acrt_call_reportfault(3,0x40000015,1);
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_0049881f(3);
+}
+
+
