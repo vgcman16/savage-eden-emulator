@@ -169,3 +169,27 @@ Success criteria for pass 2:
 
 - `1d00f67be12c7d6a` shows a clearly different dominant axis or different signed delta pattern between at least two directional runs
 - or a neighboring entity-position family such as `1d004d23c18ad027` becomes the cleaner directional indicator
+
+## Pass 3 Open-Area Recapture
+
+The pass-2 long runs showed a new constraint: the current spawn location does not allow much clean travel in every direction. East-long still activated `1d00f67be12c7d6a`, but west-long and north-long left that family static and instead made `1d004d23c18ad027` much noisier. Treat that as useful evidence, but do not use those runs as the final direction-mapping proof.
+
+Before the next controlled pass:
+
+- manually relocate the character to a less constrained open floor area
+- pick one visible floor marker or tile edge as the common start point
+- keep the camera fixed for the whole set
+- avoid turning before the directional click if keyboard movement still is not available
+
+Recommended open-area labels:
+
+- `open-idle`
+- `open-east`
+- `open-west`
+- `open-north`
+
+Success criteria for pass 3:
+
+- `1d00f67be12c7d6a` either flips sign or switches dominant axis between open-area directional runs
+- or `1d004d23c18ad027` cleanly separates one directional run from the others instead of merely becoming active under constrained pathing
+- or both families prove that one is local-player motion while the other is nearby-entity or pathing feedback
